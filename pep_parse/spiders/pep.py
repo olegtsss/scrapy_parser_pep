@@ -11,7 +11,7 @@ class PepSpider(scrapy.Spider):
 
     def parse(self, response):
         for tr_pep in response.css('section[id="numerical-index"] tbody tr'):
-            href = tr_pep.css('td')[1].css('a::attr(href)').get()
+            href = tr_pep.css('td a::attr(href)').get()
             if href is not None:
                 yield response.follow(href, callback=self.parse_pep)
 
@@ -20,11 +20,7 @@ class PepSpider(scrapy.Spider):
             'h1.page-title::text'
         ).get().split(' – ')
         yield PepParseItem(
-            dict(
-                name=name,
-                number=int(raw_number.split()[1]),
-                status=response.css(
-                    'dt:contains("Status") + dd'
-                ).css('abbr::text').get()
-            )
+            name=name,
+            number=int(raw_number.split()[1]),
+            status=response.css('dt:contains("Status") + dd abbr::text').get()
         )

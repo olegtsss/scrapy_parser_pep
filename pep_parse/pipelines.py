@@ -30,10 +30,10 @@ class PepParsePipeline:
         with open(self.downloads_dir / (
             f'status_summary_{dt.datetime.now().strftime(DATETIME_FORMAT)}.csv'
         ), 'w', encoding='utf-8') as file:
-            csv.writer(file, csv.unix_dialect).writerows(
-                [
-                    PEPS_HEAD,
-                    *self.peps_result.items(),
-                    (PEPS_TAIL, sum(self.peps_result.values()))
-                ]
-            )
+            csv.writer(
+                file, csv.unix_dialect
+            ).writerows([
+                PEPS_HEAD,
+                *self.peps_result.items(),
+                (PEPS_TAIL, sum(self.peps_result.values()))
+            ])
