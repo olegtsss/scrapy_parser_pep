@@ -1,8 +1,9 @@
 BOT_NAME = 'pep_parse'
+# NEWSPIDER_MODULE = 'pep_parse.spiders'
 SPIDER_MODULES = ['pep_parse.spiders']
-NEWSPIDER_MODULE = 'pep_parse.spiders'
 ROBOTSTXT_OBEY = True
 
+ALLOWED_DOMAINS = ['peps.python.org']
 DIR_WITH_RESULTS = 'results'
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 FEEDS = {
